@@ -1,3 +1,5 @@
+import gspread
+from google.oauth2.service_account import Credentials
 import tkinter as tk
 from datetime import date
 
@@ -38,3 +40,18 @@ message_label = tk.Label(window, text="", bg="lightgray", fg="black", font=("Ari
 message_label.place(x=150, y=265)
 
 window.mainloop()
+st.write("Google接続テスト")
+
+scope = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
+
+creds = Credentials.from_service_account_file(
+    "credentials.json",
+    scopes=scope
+)
+
+client = gspread.authorize(creds)
+
+st.success("認証成功！")
